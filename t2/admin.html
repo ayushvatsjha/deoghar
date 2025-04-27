@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel - Add Tournament</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            gap: 10px;
+        }
+        input, textarea, button {
+            padding: 8px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Add New Tournament</h1>
+
+    <form id="tournamentForm">
+        <input type="text" id="name" placeholder="Tournament Name" required>
+        <input type="date" id="date" placeholder="Tournament Date" required>
+        <input type="text" id="location" placeholder="Location" required>
+        <input type="number" id="fees" placeholder="Entry Fees" required>
+        <textarea id="details" placeholder="Additional Details" rows="4"></textarea>
+        <button type="submit">Submit Tournament</button>
+    </form>
+
+    <script>
+        const form = document.getElementById('tournamentForm');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const tournament = {
+                name: document.getElementById('name').value,
+                date: document.getElementById('date').value,
+                location: document.getElementById('location').value,
+                fees: document.getElementById('fees').value,
+                details: document.getElementById('details').value
+            };
+
+            const response = await fetch('/add-tournament', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(tournament)
+            });
+
+            const result = await response.json();
+            alert(result.message);
+            form.reset();
+        });
+    </script>
+
+</body>
+</html>

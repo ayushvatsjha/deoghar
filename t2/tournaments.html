@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tournaments - Deoghar Chess Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #f39c12;
+            --light: #ecf0f1;
+            --white: #ffffff;
+            --text: #333333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 8%;
+            background-color: var(--primary);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo img {
+            height: 70px;
+            width: auto;
+            border-radius: 15px;
+        }
+        
+        .logo span {
+            color: var(--white);
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.8rem;
+        }
+        
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a.active {
+            color: var(--secondary);
+        }
+        
+        /* Hero Section with Background Image */
+        .tournament-hero {
+            height: 50vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('..jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            padding-top: 100px;
+        }
+        
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Tournament Grid */
+        .tournament-container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+        
+        .tournament-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .tournament-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .tournament-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .tournament-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .tournament-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .tournament-card:hover .tournament-image img {
+            transform: scale(1.05);
+        }
+        
+        .tournament-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--secondary);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+        
+        .tournament-content {
+            padding: 1.5rem;
+        }
+        
+        .tournament-date {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tournament-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .tournament-location {
+            color: #666;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .tournament-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            flex: 1;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: var(--secondary);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background: #e67e22;
+        }
+        
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+        
+        /* Admin Controls */
+        .admin-controls {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .admin-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+        
+        .admin-btn:hover {
+            transform: scale(1.1);
+            background: #1a252f;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background: var(--white);
+            margin: 5% auto;
+            padding: 2rem;
+            width: 90%;
+            max-width: 700px;
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #333;
+            background: none;
+            border: none;
+        }
+        
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        /* Floating WhatsApp Button */
+        .float-whatsapp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .tournament-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .admin-controls {
+                bottom: 90px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">
+            <img src="WhatsApp Image 2025-04-26 at 2.10.40 PM.jpeg" alt="Deoghar Chess Academy Logo">
+            <span>Deoghar Chess Academy</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="classes.html">Classes</a></li>
+            <li><a href="tournaments.html" class="active">Tournaments</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section with Background Image -->
+    <section class="tournament-hero">
+        <div class="hero-content">
+            <h1>Chess Tournaments</h1>
+            <p>Compete in our exciting chess events and showcase your skills</p>
+        </div>
+    </section>
+
+    <!-- Tournament Grid Section -->
+    <div class="tournament-container">
+        <h2>Upcoming Tournaments</h2>
+        <div class="tournament-grid" id="tournamentGrid">
+            <!-- Tournaments will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Admin Controls -->
+    <div class="admin-controls" id="adminControls">
+        <div class="admin-btn" id="addTournamentBtn">
+            <i class="fas fa-plus"></i>
+        </div>
+        <div class="admin-btn" id="editTournamentsBtn">
+            <i class="fas fa-edit"></i>
+        </div>
+    </div>
+
+    <!-- Add Tournament Modal -->
+    <div class="modal" id="addTournamentModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeAddModal">&times;</button>
+            <h2>Add New Tournament</h2>
+            <form id="addTournamentForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Tournament Name</label>
+                        <input type="text" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" name="date" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" name="location" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea name="description" rows="4" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Main Image</label>
+                    <input type="file" name="image" accept="image/*" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Add Tournament
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- View Details Modal -->
+    <div class="modal" id="detailsModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeDetailsModal">&times;</button>
+            <div id="tournamentDetails">
+                <!-- Details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/+919818334513" class="float-whatsapp" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Sample tournament data
+        const tournaments = [
+            {
+                id: 1,
+                name: "Deoghar Chess Upcoming",
+                date: "May 15, 2025",
+                location: "Indoor Tournament",
+                description: "Annual chess championship for all age groups",
+                image: "deoghar-open.jpg",
+                badge: "Upcoming"
+            },
+            {
+                id: 2,
+                name: "Junior Tournament",
+                date: "June 28, 2025",
+                location: "Online",
+                description: "Special tournament for junior players under 18",
+                image: "junior-tournament.jpg",
+                badge: "Online"
+            },
+            {
+                id: 3,
+                name: "Underwanderers Day",
+                date: "August 12, 2025",
+                location: "Special Event",
+                description: "Unique chess event with special rules",
+                image: "independence-day.jpg",
+                badge: "Special"
+            }
+        ];
+
+        // DOM Content Loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            const isAdmin = true; // Set to true for admin access
+            
+            // Load tournaments
+            renderTournaments();
+            
+            // Toggle admin controls
+            if (isAdmin) {
+                document.getElementById('adminControls').style.display = 'flex';
+            }
+            
+            // Modal toggle functions
+            setupModal('addTournamentBtn', 'addTournamentModal', 'closeAddModal');
+            setupModal('editTournamentsBtn', 'addTournamentModal', 'closeAddModal'); // Reusing add modal for edit in this example
+            
+            // View details functionality
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('view-details-btn')) {
+                    e.preventDefault();
+                    const tournamentId = parseInt(e.target.closest('.tournament-card').dataset.id);
+                    const tournament = tournaments.find(t => t.id === tournamentId);
+                    showTournamentDetails(tournament);
+                }
+            });
+            
+            // Close modal buttons
+            document.getElementById('closeDetailsModal').addEventListener('click', function() {
+                document.getElementById('detailsModal').style.display = 'none';
+            });
+            
+            document.getElementById('closeAddModal').addEventListener('click', function() {
+                document.getElementById('addTournamentModal').style.display = 'none';
+            });
+            
+            // Close when clicking outside modal
+            window.addEventListener('click', function(e) {
+                if (e.target.classList.contains('modal')) {
+                    document.getElementById('detailsModal').style.display = 'none';
+                    document.getElementById('addTournamentModal').style.display = 'none';
+                }
+            });
+            
+            // Form submission
+            document.getElementById('addTournamentForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('In a real app, this would save to database');
+                this.reset();
+                document.getElementById('addTournamentModal').style.display = 'none';
+            });
+        });
+        
+        function setupModal(openBtnId, modalId, closeBtnId) {
+            const openBtn = document.getElementById(openBtnId);
+            const modal = document.getElementById(modalId);
+            
+            if (openBtn) {
+                openBtn.addEventListener('click', () => {
+                    modal.style.display = 'block';
+                });
+            }
+        }
+        
+        function renderTournaments() {
+            const container = document.getElementById('tournamentGrid');
+            container.innerHTML = '';
+            
+            tournaments.forEach(tournament => {
+                const card = document.createElement('div');
+                card.className = 'tournament-card';
+                card.dataset.id = tournament.id;
+                
+                card.innerHTML = `
+                    <div class="tournament-image">
+                        <img src="${tournament.image}" alt="${tournament.name}">
+                        <div class="tournament-badge">${tournament.badge}</div>
+                    </div>
+                    <div class="tournament-content">
+                        <div class="tournament-date">${tournament.date}</div>
+                        <h3 class="tournament-title">${tournament.name}</h3>
+                        <div class="tournament-location">
+                            <i class="fas fa-map-marker-alt"></i> ${tournament.location}
+                        </div>
+                        <div class="tournament-actions">
+                            <a href="#" class="btn btn-secondary view-details-btn">View Details</a>
+                            <a href="tournament-register.html" class="btn btn-primary">Register Now</a>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
+        }
+        
+        function showTournamentDetails(tournament) {
+            const detailsContainer = document.getElementById('tournamentDetails');
+            detailsContainer.innerHTML = `
+                <img src="${tournament.image}" alt="${tournament.name}" style="width:100%; border-radius:8px; margin-bottom:1rem;">
+                <h2>${tournament.name}</h2>
+                <p><strong>Date:</strong> ${tournament.date}</p>
+                <p><strong>Location:</strong> ${tournament.location}</p>
+                <p>${tournament.description}</p>
+                <div style="margin-top:2rem;">
+                    <a href="tournament-register.html" class="btn btn-primary">Register Now</a>
+                </div>
+            `;
+            
+            document.getElementById('detailsModal').style.display = 'block';
+        }
+    </script>
+<script src="tournaments.js"></script>
+
+</body>
+</html>

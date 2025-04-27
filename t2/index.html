@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deoghar Chess Academy</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Social Icons (Top Right) -->
+    <div class="top-right-social">
+        <a href="https://wa.me/+919818334513" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+        </a>
+        <a href="https://www.facebook.com/groups/2636260526394735/" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
+        </a>
+        <a href="https://www.youtube.com/@deogharchessacademy6281" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" alt="YouTube">
+        </a>
+    </div>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/+919818334513" class="float-whatsapp" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+        <span>Chat with Us</span>
+    </a>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">
+            <img src="WhatsApp Image 2025-04-26 at 2.10.40 PM.jpeg" alt="Deoghar Chess Academy Logo">
+            <span>Deoghar Chess Academy</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="#classes">Classes</a></li>
+            <li><a href="tournaments.html">Tournaments</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Deoghar Chess Academy</h1>
+            <p>Master chess with expert coaches and interactive training!</p>
+            <button class="cta-button" id="registerBtn">Register Now</button>
+        </div>
+    </section>
+
+   
+
+    <!-- Registration Modal -->
+    <div class="registration-modal" id="registrationModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Choose Registration Type</h2>
+            <div class="registration-options">
+                <div class="option-card" onclick="window.location.href='tournament-register.html'">
+                    <i class="fas fa-trophy"></i>
+                    <h3>Tournament Registration</h3>
+                    <p>Compete in upcoming chess events</p>
+                </div>
+                <div class="option-card" onclick="window.location.href='class-register.html'">
+                    <i class="fas fa-chess-knight"></i>
+                    <h3>Class Registration</h3>
+                    <p>Join our training programs</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

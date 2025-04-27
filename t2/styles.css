@@ -1,0 +1,661 @@
+:root {
+  --primary: #2c3e50;
+  --secondary: #f39c12;
+  --light: #ecf0f1;
+  --white: #ffffff;
+  --text: #333333;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text);
+  background-color: var(--light);
+  line-height: 1.6;
+}
+
+/* ===== Top Right Social Icons ===== */
+.top-right-social {
+  position: fixed;
+  top: 25px;
+  right: 5%;
+  z-index: 1001;
+  display: flex;
+  gap: 12px;
+}
+
+.top-right-social img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: transform 0.3s;
+}
+
+.top-right-social img:hover {
+  transform: scale(1.1);
+}
+
+/* ===== Navigation Bar ===== */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 8%;
+  background-color: var(--primary);
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo img {
+  height: 70px;
+  width: auto;
+  border-radius: 15px;
+}
+
+.logo span {
+  color: var(--white);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 1.8rem;
+  margin-right: 120px;
+}
+
+.nav-links a {
+  color: var(--white);
+  font-weight: 500;
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--secondary);
+  transition: width 0.3s;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* ===== Hero Section ===== */
+.hero {
+  height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+              url('training.jpeg') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--white);
+  padding-top: 100px;
+}
+
+/* ... (continue with all other sections from previous CSS) ... */
+
+@media (max-width: 1024px) {
+  .nav-links {
+    margin-right: 90px;
+    gap: 1.2rem;
+  }
+  .top-right-social {
+    right: 3%;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+  .top-right-social {
+    top: 20px;
+    right: 20px;
+  }
+}
+/* ===== HERO SECTION FIXES ===== */
+.hero-content h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.hero-content p {
+  font-size: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.cta-button {
+  padding: 1rem 3rem;
+  font-size: 1.3rem;
+  border-radius: 50px;
+  min-width: 200px; /* Ensures button doesn't look too narrow */
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .hero-content h1 { font-size: 2.5rem; }
+  .hero-content p { font-size: 1.2rem; }
+  .cta-button { padding: 0.8rem 2rem; }
+}
+/* ===== About Page Styles ===== */
+.about-page {
+  padding: 6rem 5%;
+  background: var(--white);
+  min-height: 100vh;
+  padding-top: 120px;
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.about-text h1 {
+  font-size: 2.8rem;
+  color: var(--primary);
+  margin-bottom: 2rem;
+}
+
+.about-text h2 {
+  color: var(--secondary);
+  margin: 1.5rem 0 1rem;
+  font-size: 1.8rem;
+}
+
+.about-images {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.about-images img {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+  .about-grid {
+      grid-template-columns: 1fr;
+  }
+}
+/* ===== Floating WhatsApp Button ===== */
+.float-whatsapp {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #25D366; /* WhatsApp green */
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 30px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  overflow: hidden;
+}
+
+.float-whatsapp i {
+  margin-top: 5px;
+}
+
+.float-whatsapp span {
+  font-size: 0;
+  opacity: 0;
+  transition: all 0.3s;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+}
+
+.float-whatsapp:hover {
+  width: 180px;
+  border-radius: 50px;
+  background-color: #128C7E; /* Darker WhatsApp green */
+}
+
+.float-whatsapp:hover span {
+  font-size: 14px;
+  opacity: 1;
+  margin-left: 10px;
+  display: inline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .float-whatsapp {
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    font-size: 25px;
+  }
+  
+  .float-whatsapp:hover {
+    width: 160px;
+  }
+}
+/* ===== Registration Modal Styles ===== */
+.registration-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  margin: 10% auto;
+  padding: 2rem;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.registration-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.option-card {
+  padding: 1.5rem;
+  border: 2px solid #eee;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.option-card:hover {
+  border-color: #f39c12;
+  transform: translateY(-5px);
+}
+
+@media (max-width: 768px) {
+  .registration-options {
+      grid-template-columns: 1fr;
+  }
+}
+/* ===== Tournament Filter Styles ===== */
+.tournament-filter {
+  background: var(--primary);
+  padding: 1.5rem 5%;
+  color: white;
+}
+
+.filter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.filter-box {
+  margin-bottom: 0;
+}
+
+.filter-box label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.filter-box input,
+.filter-box select {
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 4px;
+  border: none;
+}
+
+/* ===== Tournament Grid Styles ===== */
+.tournament-grid-section {
+  padding: 3rem 5%;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sorting-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.sorting-options select {
+  padding: 0.5rem;
+  margin-left: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.view-options span {
+  margin-left: 1rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.view-options span.active {
+  background: var(--secondary);
+  color: white;
+}
+
+.tournament-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.tournament-item {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.tournament-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.tournament-image {
+  height: 180px;
+  overflow: hidden;
+}
+
+.tournament-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.tournament-item:hover .tournament-image img {
+  transform: scale(1.05);
+}
+
+.tournament-details {
+  padding: 1.5rem;
+}
+
+.tournament-date {
+  color: var(--secondary);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.tournament-date i {
+  margin-right: 0.5rem;
+}
+
+.tournament-title {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+}
+
+.tournament-location {
+  color: #666;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.tournament-location i {
+  margin-right: 0.5rem;
+  color: var(--secondary);
+}
+
+.tournament-prize {
+  background: #f8f9fa;
+  padding: 0.8rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.tournament-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tournament-actions a {
+  display: inline-block;
+  padding: 0.6rem 1rem;
+  border-radius: 5px;
+  font-weight: 500;
+  text-align: center;
+  flex: 1;
+  margin: 0 0.2rem;
+}
+
+.details-btn {
+  background: white;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+
+.register-btn {
+  background: var(--secondary);
+  color: white;
+  border: 1px solid var(--secondary);
+}
+
+/* ===== Form Modal Styles ===== */
+.tournament-form-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.modal-content {
+  background: white;
+  margin: 5% auto;
+  padding: 2rem;
+  width: 90%;
+  max-width: 700px;
+  border-radius: 8px;
+  position: relative;
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #666;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.form-row {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.submit-btn {
+  background: var(--secondary);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.submit-btn:hover {
+  background: #e67e22;
+}
+
+/* Admin Upload Button */
+.admin-upload {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 100;
+}
+
+.admin-upload button {
+  background: var(--secondary);
+  color: white;
+  border: none;
+  padding: 1rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .filter-grid {
+      grid-template-columns: 1fr;
+  }
+  
+  .form-row {
+      flex-direction: column;
+      gap: 0;
+  }
+  
+  .tournament-grid {
+      grid-template-columns: 1fr;
+  }
+}
+/* Add to your existing styles.css */
+
+/* Make logo clickable */
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Make entire tournament card clickable */
+.tournament-card {
+  cursor: pointer;
+  position: relative;
+}
+
+/* Prevent buttons from triggering their own clicks */
+.tournament-actions button {
+  pointer-events: none;
+}
+
+/* Make sure links in nav are properly styled */
+.nav-links a.active {
+  color: var(--secondary);
+  font-weight: 600;
+}
+
+.nav-links a.active::after {
+  width: 100%;
+  background-color: var(--secondary);
+}
+/* Add to your styles.css */
+.nav-links .tournament-btn {
+  background: var(--secondary);
+  color: white;
+  padding: 0.5rem 1.2rem;
+  border-radius: 50px;
+  margin-left: 1rem;
+  transition: all 0.3s;
+}
+
+.nav-links .tournament-btn:hover {
+  background: #e67e22;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
